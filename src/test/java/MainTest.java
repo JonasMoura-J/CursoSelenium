@@ -10,5 +10,6 @@ public class MainTest {
 		WebDriver wd = new ChromeDriver();
 		wd.get("https://www.google.com.br/");
 		Assert.assertEquals("Google", wd.getTitle());
+		wd.quit();
 	}
 }

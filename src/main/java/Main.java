@@ -6,5 +6,6 @@ public class Main {
 		WebDriver wd = new ChromeDriver();
 		wd.get("https://www.google.com.br/");
 		System.out.println(wd.getTitle());
+		wd.quit();
 	}
 }
