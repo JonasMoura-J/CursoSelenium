@@ -26,4 +26,17 @@ public class MainTest extends Main{
 		
 		wd.quit();
 	}
+	
+	@Test
+	public void radioButtonTest() {
+		WebDriver wd = new ChromeDriver();
+		wd.get("https://github.com/JonasMoura-J");
+		wd.findElement(By.cssSelector("#js-pjax-container > div.mt-4.position-sticky.top-0.d-none.d-md-block.color-bg-primary.width-full.border-bottom.color-border-secondary > div > div > div.flex-shrink-0.col-12.col-md-9.mb-4.mb-md-0 > div > div > span")).click();
+		
+		//testando se obteve sucesso
+		boolean isSelecionado = wd.findElement(By.cssSelector("#js-pjax-container > div.mt-4.position-sticky.top-0.d-none.d-md-block.color-bg-primary.width-full.border-bottom.color-border-secondary > div > div > div.flex-shrink-0.col-12.col-md-9.mb-4.mb-md-0 > div > div > span")).isSelected();
+		Assert.assertTrue(isSelecionado);
+		
+		wd.quit();
+	}
 }
