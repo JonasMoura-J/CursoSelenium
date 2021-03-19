@@ -2,7 +2,9 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.Select;
 
 public class MainTest extends Main{
 	
@@ -38,5 +40,23 @@ public class MainTest extends Main{
 		Assert.assertTrue(isSelecionado);
 		
 		wd.quit();
+	}
+	
+	@Test
+	public void selectTest() {
+		WebDriver wd = new ChromeDriver();
+		wd.get("https://github.com/JonasMoura-J");
+		WebElement element = wd.findElement(By.cssSelector("<a href=\"#\" class=\"dropdown-toggle hvrcenter menu-text menu-txt\""
+				+ " data-toggle=\"dropdown\" data-hover=\"dropdown\" aria-expanded=\"false\">Cursos <i class=\"fa "
+				+ "fa-angle-down\" aria-hidden=\"true\" style=\"color: #fff; font-size: 15px; \"></i></a>"));
+		
+		Select combo = new Select(element);
+		combo.selectByIndex(3);
+		
+//		//testando se obteve sucesso
+//		boolean isSelecionado = wd.findElement(By.cssSelector("<a href=\"#\" class=\"dropdown-toggle hvrcenter menu-text menu-txt\" data-toggle=\"dropdown\" data-hover=\"dropdown\" aria-expanded=\"false\">Cursos <i class=\"fa fa-angle-down\" aria-hidden=\"true\" style=\"color: #fff; font-size: 15px; \"></i></a>")).isSelected();
+//		Assert.assertTrue(isSelecionado);
+//		
+//		wd.quit();
 	}
 }
