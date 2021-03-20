@@ -1,3 +1,7 @@
+import static org.junit.Assert.assertEquals;
+
+import java.util.List;
+
 import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.By;
@@ -55,5 +59,16 @@ public class MainTest extends Main{
 		
 		Assert.assertEquals("2o grau completo", combo.getFirstSelectedOption().getText());	
 		wd.quit();
+	}
+	
+	@Test
+	public void deveVerificarValoresSelectTest() {
+		WebDriver wd = new ChromeDriver();
+		wd.get("file:///" + System.getProperty("user.dir") + "/src/main/resources/componentes.html");
+		WebElement element = wd.findElement(By.id("elementosForm:escolaridade"));
+		
+		Select combo = new Select(element);
+		List<WebElement> options = combo.getOptions();
+		assertEquals(8, options.size());
 	}
 }
