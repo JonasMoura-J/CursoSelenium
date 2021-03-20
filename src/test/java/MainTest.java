@@ -43,20 +43,17 @@ public class MainTest extends Main{
 	}
 	
 	@Test
-	public void selectTest() {
+	public void deveInteragirComOSelectTest() {
 		WebDriver wd = new ChromeDriver();
-		wd.get("https://github.com/JonasMoura-J");
-		WebElement element = wd.findElement(By.cssSelector("<a href=\"#\" class=\"dropdown-toggle hvrcenter menu-text menu-txt\""
-				+ " data-toggle=\"dropdown\" data-hover=\"dropdown\" aria-expanded=\"false\">Cursos <i class=\"fa "
-				+ "fa-angle-down\" aria-hidden=\"true\" style=\"color: #fff; font-size: 15px; \"></i></a>"));
+		wd.get("file:///" + System.getProperty("user.dir") + "/src/main/resources/componentes.html");
+		WebElement element = wd.findElement(By.id("elementosForm:escolaridade"));
 		
 		Select combo = new Select(element);
 		combo.selectByIndex(3);
 		
-//		//testando se obteve sucesso
-//		boolean isSelecionado = wd.findElement(By.cssSelector("<a href=\"#\" class=\"dropdown-toggle hvrcenter menu-text menu-txt\" data-toggle=\"dropdown\" data-hover=\"dropdown\" aria-expanded=\"false\">Cursos <i class=\"fa fa-angle-down\" aria-hidden=\"true\" style=\"color: #fff; font-size: 15px; \"></i></a>")).isSelected();
-//		Assert.assertTrue(isSelecionado);
-//		
-//		wd.quit();
+		combo.selectByVisibleText("2o grau completo");
+		
+		Assert.assertEquals("2o grau completo", combo.getFirstSelectedOption().getText());	
+		wd.quit();
 	}
 }
