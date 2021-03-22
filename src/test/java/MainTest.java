@@ -70,5 +70,22 @@ public class MainTest extends Main{
 		Select combo = new Select(element);
 		List<WebElement> options = combo.getOptions();
 		assertEquals(8, options.size());
+		wd.quit();
+	}
+	
+	@Test
+	public void deveVerificarValoresSelectMultiploTest() {
+		WebDriver wd = new ChromeDriver();
+		wd.get("file:///" + System.getProperty("user.dir") + "/src/main/resources/componentes.html");
+		WebElement element = wd.findElement(By.id("elementosForm:esportes"));
+		
+		Select combo = new Select(element);
+		combo.selectByVisibleText("Natacao");
+		combo.selectByVisibleText("Corrida");
+		combo.selectByVisibleText("O que eh esporte?");
+		
+		List<WebElement> allSelectedOptions = combo.getAllSelectedOptions();
+		Assert.assertEquals(3, allSelectedOptions.size());
+		wd.quit();
 	}
 }
