@@ -3,6 +3,7 @@ import static org.junit.Assert.assertEquals;
 import java.util.List;
 
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -97,6 +98,28 @@ public class MainTest extends Main{
 		
 		element.click();
 		Assert.assertEquals("Obrigado!", element.getAttribute("value"));
+		wd.quit();
+	}
+	
+	@Test
+	public void deveInteragirComLink() {
+		WebDriver wd = new ChromeDriver();
+		wd.get("file:///" + System.getProperty("user.dir") + "/src/main/resources/componentes.html");
+		WebElement element = wd.findElement(By.linkText("Voltar"));
+		
+		element.click();
+		Assert.assertEquals("Voltou!", wd.findElement(By.id("resultado")).getText());
+		wd.quit();
+	}
+	
+	@Test
+	public void deveBuscarTextosNaPagina() {
+		WebDriver wd = new ChromeDriver();
+		wd.get("file:///" + System.getProperty("user.dir") + "/src/main/resources/componentes.html");
+		
+		Assert.assertEquals("Campo de Treinamento", wd.findElement(By.tagName("h3")).getText());
+		Assert.assertEquals("Cuidado onde clica, muitas armadilhas...",
+				wd.findElement(By.className("facilAchar")).getText());
 		wd.quit();
 	}
 }
