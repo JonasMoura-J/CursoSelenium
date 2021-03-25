@@ -1,5 +1,6 @@
 <html xmlns="http://www.w3.org/1999/xhtml" encoding="ISO-8859-1"> 
 <head>
+	<link href="./style.css" rel="stylesheet">
 <title>Campo de Treinamento</title>
 
 <SCRIPT LANGUAGE="JavaScript">
@@ -79,10 +80,10 @@ function fazerCadastro() {
 			<input type="hidden" name="elementosForm" value="elementosForm" />
 
 			<h3>Campo de Treinamento</h3>
-			<input type="button" id="buttonSimple" value="Clique Me!" onClick="javascript:clicado()">
-			<input type="button" id="buttonPopUpEasy" value="Abrir Popup" onClick="javascript:createPopup('Popup')">
-			<input type="button" id="buttonPopUpHard" value="Abrir Popup do Mal" onClick="javascript:createPopup('')">
-			<input type="button" id="buttonDelay" value="Resposta Demorada" onClick="javascript:timingChange()">
+			<input type="button" class ="inputs-buttons" id="buttonSimple" value="Clique Me!" onClick="javascript:clicado()">
+			<input type="button" class ="inputs-buttons" id="buttonPopUpEasy" value="Abrir Popup" onClick="javascript:createPopup('Popup')">
+			<input type="button" class ="inputs-buttons" id="buttonPopUpHard" value="Abrir Popup do Mal" onClick="javascript:createPopup('')">
+			<input type="button" class ="inputs-buttons" id="buttonDelay" value="Resposta Demorada" onClick="javascript:timingChange()">
 			<iframe id="frame1" src="frame.html" style="border: 0px" height="20"></iframe>
 			<table bgcolor="FFDEAD">
 				<tbody>
@@ -291,7 +292,5 @@ function fazerCadastro() {
 		<br />
 		<a href="#" onclick="javascript:voltou()">Voltar</a>
 	</center>
-	<iframe id="frame2" src="frame.html" style="border: 0px" height="20"></iframe>
-	Desenvolvido para o <a href="http://bit.ly/CursoSeleniumWcaquino">Curso de Testes Funcionais automatizados com Selenium Webdriver</a>
 </body>
 </html>
