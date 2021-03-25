@@ -88,4 +88,15 @@ public class MainTest extends Main{
 		Assert.assertEquals(3, allSelectedOptions.size());
 		wd.quit();
 	}
+	
+	@Test
+	public void deveInteragirComBotoes() {
+		WebDriver wd = new ChromeDriver();
+		wd.get("file:///" + System.getProperty("user.dir") + "/src/main/resources/componentes.html");
+		WebElement element = wd.findElement(By.id("buttonSimple"));
+		
+		element.click();
+		Assert.assertEquals("Obrigado!", element.getAttribute("value"));
+		wd.quit();
+	}
 }
