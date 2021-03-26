@@ -62,4 +62,25 @@ public class TesteAlert {
 		alert.dismiss();
 		wd.quit();
 	}
+	
+	@Test
+	public void deveIntragirComAlertComPrompt() {
+		WebDriver wd = new ChromeDriver();
+		wd.get("file:///" + System.getProperty("user.dir") + "/src/main/resources/componentes.html");
+		
+		wd.findElement(By.id("prompt")).click();
+		
+		Alert alert = wd.switchTo().alert();
+		String textoAlert = alert.getText();
+		
+		Assert.assertEquals("Digite um numero", textoAlert);
+		alert.sendKeys("123");
+		alert.accept();
+		Assert.assertEquals("Era 123?", alert.getText());
+		alert.accept();
+		Assert.assertEquals(":D", alert.getText());
+		alert.accept();
+		
+		wd.quit();
+	}
 }
