@@ -1,6 +1,8 @@
 package Tests;
 
+import org.junit.After;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
@@ -8,12 +10,22 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 public class TesteAlert {
+private WebDriver wd;
+	
+	@Before //antes de cada test, executar o conteúdo deste método. nem precisa fazer a chamada no metodo em cada test
+	public void incializa() {
+		wd = new ChromeDriver();
+		wd.get("file:///" + System.getProperty("user.dir")
+		+ "/src/main/resources/componentes.html");
+	}
+	
+	@After //após cada execução de teste
+	public void finaliza() {
+		wd.quit();
+	}
 	
 	@Test
 	public void deveIntragirComAlertSimples() {
-		WebDriver wd = new ChromeDriver();
-		wd.get("file:///" + System.getProperty("user.dir") + "/src/main/resources/componentes.html");
-		
 		wd.findElement(By.id("alert")).click();
 		
 		//fazendo com que o selenium altere o foco da página para identificar o alert
@@ -24,14 +36,10 @@ public class TesteAlert {
 		alert.accept();
 		
 		wd.findElement(By.id("elementosForm:nome")).sendKeys(textoAlert);
-		wd.quit();
 	}
 	
 	@Test
 	public void deveIntragirComAlertConfirm() {
-		WebDriver wd = new ChromeDriver();
-		wd.get("file:///" + System.getProperty("user.dir") + "/src/main/resources/componentes.html");
-		
 		wd.findElement(By.id("confirm")).click();
 		
 		//fazendo com que o selenium altere o foco da página para identificar o alert
@@ -43,14 +51,10 @@ public class TesteAlert {
 		
 		Assert.assertEquals("Confirm Simples", textoAlert);
 		alert.accept();
-		wd.quit();
 	}
 	
 	@Test
 	public void deveIntragirComAlertDismiss() {
-		WebDriver wd = new ChromeDriver();
-		wd.get("file:///" + System.getProperty("user.dir") + "/src/main/resources/componentes.html");
-		
 		wd.findElement(By.id("confirm")).click();
 		
 		Alert alert = wd.switchTo().alert();
@@ -60,14 +64,10 @@ public class TesteAlert {
 		
 		Assert.assertEquals("Confirm Simples", textoAlert);
 		alert.dismiss();
-		wd.quit();
 	}
 	
 	@Test
 	public void deveIntragirComAlertComPrompt() {
-		WebDriver wd = new ChromeDriver();
-		wd.get("file:///" + System.getProperty("user.dir") + "/src/main/resources/componentes.html");
-		
 		wd.findElement(By.id("prompt")).click();
 		
 		Alert alert = wd.switchTo().alert();
@@ -80,7 +80,5 @@ public class TesteAlert {
 		alert.accept();
 		Assert.assertEquals(":D", alert.getText());
 		alert.accept();
-		
-		wd.quit();
 	}
 }

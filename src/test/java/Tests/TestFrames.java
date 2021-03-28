@@ -1,6 +1,8 @@
 package Tests;
 
+import org.junit.After;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
@@ -8,12 +10,21 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 public class TestFrames {
+	public WebDriver wd;
+	@Before //antes de cada test, executar o conteúdo deste método. nem precisa fazer a chamada no metodo em cada test
+	public void incializa() {
+		wd = new ChromeDriver();
+		wd.get("file:///" + System.getProperty("user.dir")
+		+ "/src/main/resources/componentes.html");
+	}
+	
+	@After //após cada execução de teste
+	public void finaliza() {
+		wd.quit();
+	}
 	
 	@Test
 	public void deveInteragirComFrame() {
-		WebDriver wd = new ChromeDriver();
-		wd.get("file:///" + System.getProperty("user.dir") + "/src/main/resources/componentes.html");
-		
 		//trocar o foco para o frame
 		wd.switchTo().frame("frame1");
 		wd.findElement(By.id("frameButton")).click();
@@ -27,7 +38,5 @@ public class TestFrames {
 		
 		wd.switchTo().defaultContent();
 		wd.findElement(By.id("elementosForm:nome")).sendKeys(msg);
-		
-		wd.quit();
 	}
 }

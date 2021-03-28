@@ -1,6 +1,8 @@
 package Tests;
 
+import org.junit.After;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -9,12 +11,22 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.Select;
 
 public class TestCadastro {
+	private WebDriver wd;
+	
+	@Before //antes de cada test, executar o conteúdo deste método. nem precisa fazer a chamada no metodo em cada test
+	public void incializa() {
+		wd = new ChromeDriver();
+		wd.get("file:///" + System.getProperty("user.dir")
+		+ "/src/main/resources/componentes.html");
+	}
+	
+	@After //após cada execução de teste
+	public void finaliza() {
+		wd.quit();
+	}
 	
 	@Test
 	public void deveCadastrarPessoa() {
-		WebDriver wd = new ChromeDriver();
-		wd.get("file:///" + System.getProperty("user.dir")
-			+ "/src/main/resources/componentes.html");
 		
 		wd.findElement(By.id("elementosForm:nome")).sendKeys("Jonas");
 		wd.findElement(By.id("elementosForm:sobrenome")).sendKeys("Moura");
@@ -44,7 +56,5 @@ public class TestCadastro {
 		Assert.assertEquals("Comida: Carne", wd.findElement(By.id("descComida")).getText());
 		Assert.assertEquals("Escolaridade: superior", wd.findElement(By.id("descEscolaridade")).getText());
 		Assert.assertEquals("Esportes: O que eh esporte?", wd.findElement(By.id("descEsportes")).getText());
-		
-		wd.quit();
 	}
 }
