@@ -12,6 +12,7 @@ import org.openqa.selenium.support.ui.Select;
 
 public class TestCadastro {
 	private WebDriver wd;
+	private DSL dsl;
 	
 	@Before //antes de cada test, executar o conteúdo deste método. nem precisa fazer a chamada no metodo em cada test
 	public void incializa() {
@@ -27,9 +28,8 @@ public class TestCadastro {
 	
 	@Test
 	public void deveCadastrarPessoa() {
-		
-		wd.findElement(By.id("elementosForm:nome")).sendKeys("Jonas");
-		wd.findElement(By.id("elementosForm:sobrenome")).sendKeys("Moura");
+		dsl.escreve("elementosForm:nome", "Jonas");
+		dsl.escreve("elementosForm:sobrenome", "Moura");
 		
 		wd.findElement(By.id("elementosForm:sexo:0")).click();
 		//boolean isSelecionado = wd.findElement(By.id("elementosForm:sexo:0")).isSelected();
@@ -51,10 +51,10 @@ public class TestCadastro {
 		
 		Assert.assertTrue(wd.findElement(By.id("resultado")).getText().startsWith("Cadastrado!"));
 		Assert.assertTrue(wd.findElement(By.id("descNome")).getText().endsWith("Jonas"));
-		Assert.assertEquals("Sobrenome: Moura", wd.findElement(By.id("descSobrenome")).getText());
-		Assert.assertEquals("Sexo: Masculino", wd.findElement(By.id("descSexo")).getText());
-		Assert.assertEquals("Comida: Carne", wd.findElement(By.id("descComida")).getText());
-		Assert.assertEquals("Escolaridade: superior", wd.findElement(By.id("descEscolaridade")).getText());
-		Assert.assertEquals("Esportes: O que eh esporte?", wd.findElement(By.id("descEsportes")).getText());
+		Assert.assertEquals("Sobrenome: Moura", dsl.obterValorCampo("descSobrenome"));
+		Assert.assertEquals("Sexo: Masculino", dsl.obterValorCampo("descSexo"));
+		Assert.assertEquals("Comida: Carne", dsl.obterValorCampo("descComida"));
+		Assert.assertEquals("Escolaridade: superior", dsl.obterValorCampo("descEscolaridade"));
+		Assert.assertEquals("Esportes: O que eh esporte?", dsl.obterValorCampo("descEsportes"));
 	}
 }

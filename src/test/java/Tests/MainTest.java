@@ -15,12 +15,14 @@ import org.openqa.selenium.support.ui.Select;
 
 public class MainTest{
 	private WebDriver wd;
+	private DSL dsl;
 	
 	@Before //antes de cada test, executar o conteúdo deste método. nem precisa fazer a chamada no metodo em cada test
 	public void incializa() {
 		wd = new ChromeDriver();
 		wd.get("file:///" + System.getProperty("user.dir")
 		+ "/src/main/resources/componentes.html");
+		dsl = new DSL(wd);
 	}
 	
 	@After //após cada execução de teste
@@ -35,11 +37,8 @@ public class MainTest{
 	
 	@Test
 	public void textFieldTest() {
-		wd.findElement(By.name("q")).sendKeys("Teste escrita");
-		
-		//testando se obteve sucesso
-		String valorInput = wd.findElement(By.name("q")).getAttribute("value");
-		Assert.assertEquals("Teste escrita", valorInput);
+		dsl.escrever("elementosForm:nome", "Teste escrita");
+		Assert.assertEquals("Teste escrita", dsl.obterValorCampo("elementosForm:nome"));
 	}
 	
 	@Test
