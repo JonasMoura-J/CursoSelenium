@@ -1,4 +1,4 @@
-package Tests;
+package test;
 
 import org.junit.After;
 import org.junit.Assert;
@@ -10,15 +10,20 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.Select;
 
+import test.pages.CampoTreinamentoPage;
+
 public class TestCadastro {
 	private WebDriver wd;
 	private DSL dsl;
+	private CampoTreinamentoPage page;
 	
 	@Before //antes de cada test, executar o conteúdo deste método. nem precisa fazer a chamada no metodo em cada test
 	public void incializa() {
 		wd = new ChromeDriver();
 		wd.get("file:///" + System.getProperty("user.dir")
 		+ "/src/main/resources/componentes.html");
+		dsl = new DSL(wd);
+		page = new CampoTreinamentoPage(wd);
 	}
 	
 	@After //após cada execução de teste
@@ -28,8 +33,9 @@ public class TestCadastro {
 	
 	@Test
 	public void deveCadastrarPessoa() {
-		dsl.escreve("elementosForm:nome", "Jonas");
-		dsl.escreve("elementosForm:sobrenome", "Moura");
+		page.setNome("Jonas");
+		dsl.escrever("elementosForm:nome", "Jonas");
+		dsl.escrever("elementosForm:sobrenome", "Moura");
 		
 		wd.findElement(By.id("elementosForm:sexo:0")).click();
 		//boolean isSelecionado = wd.findElement(By.id("elementosForm:sexo:0")).isSelected();
