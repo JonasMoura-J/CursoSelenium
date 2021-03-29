@@ -3,7 +3,6 @@ import static org.junit.Assert.assertEquals;
 
 import java.util.List;
 
-import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -25,10 +24,10 @@ public class MainTest{
 		dsl = new DSL(wd);
 	}
 	
-	@After //após cada execução de teste
-	public void finaliza() {
-		wd.quit();
-	}
+//	@After //após cada execução de teste
+//	public void finaliza() {
+//		wd.quit();
+//	}
 	
 	@Test
 	public void acessoTest() {
@@ -105,5 +104,12 @@ public class MainTest{
 		Assert.assertEquals("Campo de Treinamento", wd.findElement(By.tagName("h3")).getText());
 		Assert.assertEquals("Cuidado onde clica, muitas armadilhas...",
 				wd.findElement(By.className("facilAchar")).getText());
+	}
+	
+	@Test
+	public void testJavaScript() {
+		WebElement element = wd.findElement(By.id("elementosForm:nome"));
+		dsl.executarJS("arguments[0].style.border = arguments[1]", element, "solid 4px red");
+		//js.executeScript("document.getElementById('elementosForm:nome').value = 'Escrito via JS'");
 	}
 }
