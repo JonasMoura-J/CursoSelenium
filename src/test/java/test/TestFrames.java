@@ -21,10 +21,10 @@ public class TestFrames {
 		dsl = new DSL(wd);
 	}
 	
-//	@After //após cada execução de teste
-//	public void finaliza() {
-//		wd.quit();
-//	}
+	@After //após cada execução de teste
+	public void finaliza() {
+		wd.quit();
+	}
 	
 	@Test
 	public void deveInteragirComFrame() {
