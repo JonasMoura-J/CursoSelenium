@@ -11,12 +11,9 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import test.pages.CampoTreinamentoPage;
-
 public class TesteSincronismo {
 	private WebDriver wd;
 	private DSL dsl;
-	private CampoTreinamentoPage page;
 	
 	@Before //antes de cada test, executar o conteúdo deste método. nem precisa fazer a chamada no metodo em cada test
 	public void incializa() {
