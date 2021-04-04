@@ -1,4 +1,4 @@
-package test;
+package com.rj.jonas.test;
 import static org.junit.Assert.assertEquals;
 
 import java.util.List;
@@ -12,6 +12,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.Select;
 
+import com.rj.jonas.core.DSL;
+
 public class MainTest{
 	private WebDriver wd;
 	private DSL dsl;
@@ -21,7 +23,7 @@ public class MainTest{
 		wd = new ChromeDriver();
 		wd.get("file:///" + System.getProperty("user.dir")
 		+ "/src/main/resources/componentes.html");
-		dsl = new DSL(wd);
+		dsl = new DSL();
 	}
 	
 //	@After //após cada execução de teste
